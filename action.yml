@@ -1,0 +1,34 @@
+name: 'soft-fail'
+description: 'Let a step fail softly: the job stays green, but the failure stays visible as a neutral check run. GitLab-style allow_failure for GitHub Actions.'
+author: 'Jitujoshi71'
+inputs:
+  run:
+    description: 'Command to run'
+    required: true
+  check-name:
+    description: 'Name of the check run created on soft failure'
+    required: false
+    default: 'soft-fail'
+  working-directory:
+    description: 'Directory to run the command in'
+    required: false
+    default: ''
+  shell:
+    description: 'Shell to run the command with: bash, sh, or pwsh'
+    required: false
+    default: 'bash'
+  create-summary:
+    description: 'Add a job summary entry when the command fails softly (true/false)'
+    required: false
+    default: 'true'
+outputs:
+  outcome:
+    description: '"success" or "soft-failed"'
+  exit-code:
+    description: 'Exit code of the command'
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
+branding:
+  icon: 'check-circle'
+  color: 'green'
