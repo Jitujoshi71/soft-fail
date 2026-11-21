@@ -1,0 +1,39 @@
+name: test
+
+on: [push, pull_request]
+
+permissions:
+  checks: write
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Intentionally failing command: must produce a neutral check run
+      # named "soft-fail demo" AND keep this job green.
+      - name: soft-fail with a failing command
+        id: failing
+        uses: ./
+        with:
+          run: echo "boom: this is the soft failure" && exit 3
+          check-name: soft-fail demo
+
+      # This step proves the job was not failed by the step above.
+      - name: job must still be green here
+        run: |
+          echo "outcome=${{ steps.failing.outputs.outcome }} exit-code=${{ steps.failing.outputs.exit-code }}"
+          test "${{ steps.failing.outputs.outcome }}" = "soft-failed"
+          test "${{ steps.failing.outputs.exit-code }}" = "3"
+
+      # Passing command: must pass through normally.
+      - name: soft-fail with a passing command
+        id: passing
+        uses: ./
+        with:
+          run: echo ok
+
+      - name: passing outcome must be success
+        run: test "${{ steps.passing.outputs.outcome }}" = "success"
