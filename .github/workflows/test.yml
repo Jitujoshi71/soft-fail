@@ -18,7 +18,7 @@ jobs:
         id: failing
         uses: ./
         with:
-          run: echo "boom: this is the soft failure" && exit 3
+          run: 'echo "boom: this is the soft failure" && exit 3'
           check-name: soft-fail demo
 
       # This step proves the job was not failed by the step above.
