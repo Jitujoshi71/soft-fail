@@ -61,6 +61,7 @@ If the command exits `0`, the step passes normally. If it exits non-zero, `soft-
 | `working-directory` | | `` | Directory to run the command in |
 | `shell` | | `bash` | `bash`, `sh`, or `pwsh` |
 | `create-summary` | | `true` | Add a job summary entry on soft failure |
+| `token` | | `${{ github.token }}` | Token used to create the check run (needs `checks: write`) |
 
 ## Outputs
 

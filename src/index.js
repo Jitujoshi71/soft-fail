@@ -139,9 +139,9 @@ async function run() {
     const shell = getInput('shell') || 'bash';
     const createSummary = (getInput('create-summary') || 'true').toLowerCase() !== 'false';
 
-    const token = process.env.GITHUB_TOKEN;
+    const token = getInput('token') || process.env.GITHUB_TOKEN;
     if (!token) {
-      setFailed('soft-fail: GITHUB_TOKEN is not set. This action needs the default workflow token with checks: write permission.');
+      setFailed('soft-fail: no token. Pass one via the "token" input (it defaults to ${{ github.token }}) or set GITHUB_TOKEN. The action needs a token with checks: write permission.');
       return;
     }
 
