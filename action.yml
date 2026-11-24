@@ -1,5 +1,5 @@
 name: 'soft-fail'
-description: 'Let a step fail softly: the job stays green, but the failure stays visible as a neutral check run. GitLab-style allow_failure for GitHub Actions.'
+description: 'GitLab-style allow_failure for GitHub Actions: a failed step stays visible as a neutral check run, job stays green.'
 author: 'Jitujoshi71'
 inputs:
   run:
