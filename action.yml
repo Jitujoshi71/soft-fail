@@ -21,6 +21,10 @@ inputs:
     description: 'Add a job summary entry when the command fails softly (true/false)'
     required: false
     default: 'true'
+  comment-on-pr:
+    description: 'Post or update a comment on the pull request listing soft failures, and remove it when a later run has none (true/false). Needs pull-requests: write; only applies to pull_request events'
+    required: false
+    default: 'false'
   token:
     description: 'Token used to create the check run (needs checks: write)'
     required: false
